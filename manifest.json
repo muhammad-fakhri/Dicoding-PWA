@@ -1,0 +1,16 @@
+{
+    "name": "My Portfolio",
+    "short_name": "MyPort",
+    "description": "My first portfolio PWA",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#0288D1",
+    "theme_color": "#0288D1",
+    "icons": [
+        {
+            "src": "images/icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
