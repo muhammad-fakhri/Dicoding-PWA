@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
 
 	// SIDEBAR NAVIGATION
-	var elems = document.querySelectorAll('.sidenav');
+	const elems = document.querySelectorAll('.sidenav');
 	M.Sidenav.init(elems);
 	loadNav();
 
 	function loadNav() {
-		var xhttp = new XMLHttpRequest();
+		const xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function () {
 			if (this.readyState == 4) {
 				if (this.status != 200) return;
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					.forEach(function (elm) {
 						elm.addEventListener('click', function (event) {
 							// Tutup sidenav
-							var sidenav = document.querySelector('.sidenav');
+							const sidenav = document.querySelector('.sidenav');
 							M.Sidenav.getInstance(sidenav).close();
 
 							// Muat konten halaman yang dipanggil 
@@ -32,15 +32,15 @@ document.addEventListener('DOMContentLoaded', function () {
 					});
 
 				// Daftarkan event listener untuk tombol tautan di jumbotron
-				var aboutButton = document.getElementById("about-button");
+				const aboutButton = document.getElementById("about-button");
 				aboutButton.addEventListener('click', function (event) {
 					// Muat halaman about
 					loadPage('about');
 				})
 
 				// Daftarkan event listener untuk logo
-				var aboutButton = document.getElementById("logo");
-				aboutButton.addEventListener('click', function (event) {
+				const logo = document.getElementById("logo");
+				logo.addEventListener('click', function (event) {
 					// Muat halaman home
 					loadPage('home');
 				})
@@ -51,15 +51,15 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	// Load page content
-	var page = window.location.hash.substr(1);
-	if (page == '') page = 'home';
+	let page = window.location.hash.substr(1);
+	if (page === '') page = 'home';
 	loadPage(page);
 
 	function loadPage(page) {
-		var xhttp = new XMLHttpRequest();
+		const xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function () {
 			if (this.readyState == 4) {
-				var content = document.querySelector(".body-content");
+				const content = document.querySelector(".body-content");
 				if (this.status == 200) {
 					content.innerHTML = xhttp.responseText;
 				} else if (this.status == 404) {
