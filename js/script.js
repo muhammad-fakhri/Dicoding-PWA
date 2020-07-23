@@ -1,3 +1,5 @@
+import { getCompetitions, getTeams } from "./api.js";
+
 document.addEventListener('DOMContentLoaded', function () {
 
 	// SIDEBAR NAVIGATION
@@ -31,19 +33,19 @@ document.addEventListener('DOMContentLoaded', function () {
 						});
 					});
 
-				// Daftarkan event listener untuk tombol tautan di jumbotron
-				const aboutButton = document.getElementById("about-button");
-				aboutButton.addEventListener('click', function (event) {
-					// Muat halaman about
-					loadPage('about');
-				})
+				// // Daftarkan event listener untuk tombol tautan di jumbotron
+				// const aboutButton = document.getElementById("about-button");
+				// aboutButton.addEventListener('click', function (event) {
+				// 	// Muat halaman about
+				// 	loadPage('about');
+				// })
 
-				// Daftarkan event listener untuk logo
-				const logo = document.getElementById("logo");
-				logo.addEventListener('click', function (event) {
-					// Muat halaman home
-					loadPage('home');
-				})
+				// // Daftarkan event listener untuk logo
+				// const logo = document.getElementById("logo");
+				// logo.addEventListener('click', function (event) {
+				// 	// Muat halaman home
+				// 	loadPage('home');
+				// })
 			}
 		};
 		xhttp.open("GET", 'nav.html', true);
@@ -71,6 +73,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		};
 		xhttp.open("GET", 'pages/' + page + '.html', true);
 		xhttp.send();
+
+		// fetch data based of active page
+		if (page === "competition") {
+			// fetch competitions data
+			getCompetitions();
+		} else if (page === "team") {
+			// fetch teams data
+			getTeams();
+		}
 	}
 
 });
