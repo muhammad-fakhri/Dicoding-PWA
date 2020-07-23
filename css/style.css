@@ -84,6 +84,11 @@ footer.page-footer {
   -webkit-box-orient: vertical;
 }
 
+.competition-emblem{
+  height: 150px;
+  object-fit: cover;
+}
+
 .team-content p {
   overflow: hidden;
   text-overflow: ellipsis;
