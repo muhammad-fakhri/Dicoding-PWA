@@ -75,7 +75,8 @@ footer.page-footer {
   object-fit: contain;
 }
 
-#team-name {
+#team-name,
+#competition-name {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

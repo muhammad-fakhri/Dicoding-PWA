@@ -56,7 +56,7 @@ function getCompetitions() {
                                 class="material-icons">favorite_border</i></a>
                     </div>
                     <div class="card-content">
-                        <span class="card-title">${competition.name}</span>
+                        <span class="card-title" id="competition-name">${competition.name}</span>
                         <p>${competition.numberOfAvailableSeasons} available seasons</p>
                         <h6>Current Season </h6>
                         <ul>
