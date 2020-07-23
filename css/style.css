@@ -16,24 +16,26 @@ p {
 }
 
 .sidenav-trigger {
-  color: #ff4081 ;
+  color: #ff4081;
 }
 
 .parallax-container {
   min-height: 380px;
   line-height: 0;
   height: auto;
-  color: rgba(255,255,255,.9);
+  color: rgba(255, 255, 255, .9);
 }
-  .parallax-container .section {
-    width: 100%;
-  }
+
+.parallax-container .section {
+  width: 100%;
+}
 
 @media only screen and (max-width : 992px) {
   .parallax-container .section {
     position: absolute;
     top: 40%;
   }
+
   #index-banner .section {
     top: 10%;
   }
@@ -48,6 +50,7 @@ p {
 .icon-block {
   padding: 0 15px;
 }
+
 .icon-block .material-icons {
   font-size: inherit;
 }
@@ -56,8 +59,34 @@ footer.page-footer {
   margin: 0;
 }
 
-#parallax-bg-img{
-   /* Add the blur effect */
-   filter: blur(4px);
-   -webkit-filter: blur(4px);
+#parallax-bg-img {
+  /* Add the blur effect */
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+}
+
+.team-crest-wrapper {
+  padding: 8px 4px;
+}
+
+.team-crest {
+  height: 200px;
+  width: auto;
+  object-fit: contain;
+}
+
+#team-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.team-content p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
