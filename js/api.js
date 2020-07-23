@@ -29,6 +29,14 @@ function error(error) {
     console.log("Error : " + error);
 }
 
+// Function for change date format
+function formatDate(dateString) {
+    let date = new Date(dateString);
+    let newDateString = date.toDateString();
+    let splittedDate = newDateString.split(" ");
+    return `${splittedDate[0]}, ${splittedDate[2]} ${splittedDate[1]} ${splittedDate[3]}`;
+}
+
 // Get all football competitions in England
 function getCompetitions() {
     fetch(baseUrl + "/competitions?areas=" + areaId, option)
@@ -44,22 +52,19 @@ function getCompetitions() {
                 <div class="card hoverable">
                     <div class="card-image">
                         <img src="${competition.emblemUrl ? competition.emblemUrl : "images/no-image.png"}">
-                        <span class="card-title">${competition.name}</span>
                         <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2"><i
                                 class="material-icons">favorite_border</i></a>
                     </div>
                     <div class="card-content">
+                        <span class="card-title">${competition.name}</span>
                         <p>${competition.numberOfAvailableSeasons} available seasons</p>
                         <h6>Current Season </h6>
                         <ul>
-                            <li>Start Date : ${competition.currentSeason.startDate}</li>
-                            <li>End Date : ${competition.currentSeason.endDate}</li>
+                            <li>Start Date : ${formatDate(competition.currentSeason.startDate)}</li>
+                            <li>End Date : ${formatDate(competition.currentSeason.endDate)}</li>
                             <li>Matchday : ${competition.currentSeason.currentMatchday ? competition.currentSeason.currentMatchday : 0}</li>
                             <li>Winner : ${competition.currentSeason.winner ? competition.currentSeason.winner : 'No Winner'}</li>
                         </ul>
-                    </div>
-                    <div class="card-action">
-                        <a href="#" class="pink-text accent-2">See details</a>
                     </div>
                 </div>
             </div>
