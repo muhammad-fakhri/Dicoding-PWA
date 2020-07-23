@@ -51,7 +51,7 @@ function getCompetitions() {
                 <div class="col s12 m4">
                 <div class="card hoverable">
                     <div class="card-image">
-                        <img src="${competition.emblemUrl ? competition.emblemUrl : "images/no-image.png"}" alt="Competition Emblem"/>
+                        <img class="competition-emblem" src="${competition.emblemUrl ? competition.emblemUrl : "images/no-image.png"}" alt="Competition Emblem"/>
                         <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2"><i
                                 class="material-icons">favorite_border</i></a>
                     </div>
