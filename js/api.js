@@ -1,3 +1,5 @@
+import { favoriteCompetition } from "./db.js";
+
 const baseUrl = "https://api.football-data.org/v2";
 const areaId = "2072"; // Area ID for England
 const apiKey = "d4719c0751f042aaba705459e07d39f2";
@@ -52,8 +54,10 @@ function getCompetitions() {
                 <div class="card hoverable">
                     <div class="card-image">
                         <img class="competition-emblem" src="${competition.emblemUrl ? competition.emblemUrl : "images/no-image.png"}" alt="Competition Emblem"/>
-                        <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2"><i
-                                class="material-icons">favorite_border</i></a>
+                        <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2" id="fav-comp-btn-${competition.id}"
+                        onclick="M.toast({html: 'Favorited ${competition.name}'});">
+                            <i class="material-icons">favorite_border</i>
+                        </a>
                     </div>
                     <div class="card-content">
                         <span class="card-title" id="competition-name">${competition.name}</span>
@@ -73,8 +77,26 @@ function getCompetitions() {
 
             // Hide the preloader
             document.getElementById("competition-preloader").classList.remove("active");
-            // Load the competition data
+            // Display the competition data
             document.getElementById("competitions").innerHTML = competitionsHTML;
+            // Add click event listener to favorite buttons
+            competitions.forEach(function (competition) {
+                document.getElementById("fav-comp-btn-" + competition.id).addEventListener('click', function (event) {
+                    favoriteCompetition(competition);
+                })
+            });
+        })
+        .catch(error);
+}
+
+// Get certain competition data
+function getCompetitionById(id) {
+    fetch(baseUrl + "/competitions/" + id, option)
+        .then(status)
+        .then(json)
+        .then(function (data) {
+            console.log(data);
+            favoriteCompetition(data);
         })
         .catch(error);
 }
