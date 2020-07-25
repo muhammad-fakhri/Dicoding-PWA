@@ -9,7 +9,6 @@ function getCompetitionById(id) {
     return new Promise(function (resolve, reject) {
         dbPromise
             .then(function (db) {
-                // check data, exist in database or not
                 let tx = db.transaction("competitions", "readwrite");
                 let store = tx.objectStore("competitions");
                 return store.get(id);
@@ -17,6 +16,32 @@ function getCompetitionById(id) {
                 resolve(competition);
             });
     });
+}
+
+function checkFavorite(type, id) {
+    dbPromise
+        .then(function (db) {
+            if (type === "competition") {
+                let tx = db.transaction("competitions", "readonly");
+                let store = tx.objectStore("competitions");
+                return store.get(id);
+            } else {
+                // TODO: Implement check team favorite
+                console.log("check favorite team");
+            }
+        }).then(function (data) {
+            if (data !== undefined) {
+                if (type === "competition") {
+                    // Change favorite button icon to favorite icon
+                    document.querySelector(`#fav-comp-btn-${data.id} i`).innerHTML = "favorite";
+                    // Change toast message
+                    document.querySelector(`#fav-comp-btn-${data.id}`)
+                        .setAttribute("onClick", `M.toast({html: 'Unfavorited ${data.name}'})`);
+                } else {
+                    // TODO: implement when team favorite data exist
+                }
+            }
+        });
 }
 
 function getAllCompetition() {

@@ -87,11 +87,13 @@ function getCompetitions() {
 
             // Hide the preloader and Display the competition data
             document.getElementById("competitions").innerHTML = competitionsHTML;
-            // Add click event listener to favorite buttons
             competitions.forEach(function (competition) {
+                // Add click event listener to favorite buttons
                 document.getElementById("fav-comp-btn-" + competition.id).addEventListener('click', function (event) {
                     favoriteCompetition(competition);
                 })
+                // Check whether the competition has been added to favorite competition
+                checkFavorite("competition", competition.id);
             });
         })
         .catch(error);
