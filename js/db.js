@@ -21,14 +21,14 @@ function getCompetitionById(id) {
 
 function getAllCompetition() {
     return new Promise(function (resolve, reject) {
-        dbPromised
+        dbPromise
             .then(function (db) {
-                var tx = db.transaction("articles", "readonly");
-                var store = tx.objectStore("articles");
+                var tx = db.transaction("competitions", "readonly");
+                var store = tx.objectStore("competitions");
                 return store.getAll();
             })
-            .then(function (articles) {
-                resolve(articles);
+            .then(function (competitions) {
+                resolve(competitions);
             });
     });
 }

@@ -88,52 +88,39 @@ function getCompetitions() {
 
 // Get all favorite football competitions
 function getFavoriteCompetitions() {
-    fetch(baseUrl + "/competitions?areas=" + areaId, option)
-        .then(status)
-        .then(json)
-        .then(function (data) {
-            // extract competitions data from API response
-            let competitions = data.competitions;
-            let competitionsHTML = "";
-            competitions.forEach(function (competition) {
-                competitionsHTML += `
-                <div class="col s12 m4">
-                <div class="card hoverable">
+    getAllCompetition().then(function (favCompetitions) {
+        console.log(favCompetitions);
+        let favCompetitionsHTML = "";
+        favCompetitions.forEach(function (competition) {
+            favCompetitionsHTML += `
+            <div class="col s12 m4">
+                <div class="card">
                     <div class="card-image">
-                        <img class="competition-emblem" src="${competition.emblemUrl ? competition.emblemUrl : "images/no-image.png"}" alt="Competition Emblem"/>
-                        <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2" id="fav-comp-btn-${competition.id}"
-                        onclick="M.toast({html: 'Favorited ${competition.name}'});">
-                            <i class="material-icons">favorite_border</i>
-                        </a>
+                        <img src="${competition.emblemUrl ? competition.emblemUrl : "images/no-image.png"}" class="competition-emblem" alt="Competition emblem">
+                        <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2" id="unfav-comp-btn-${competition.id}"
+                        onclick="M.toast({html: 'Unfavorited ${competition.name}'});"><i
+                                class="material-icons">favorite</i></a>
                     </div>
                     <div class="card-content">
-                        <span class="card-title" id="competition-name">${competition.name}</span>
-                        <p>${competition.numberOfAvailableSeasons} available seasons</p>
+                        <span class="card-title">${competition.name}</span>
+                        <p>${competition.seasons} available seasons</p>
                         <h6>Current Season </h6>
                         <ul>
-                            <li>Start Date : ${formatDate(competition.currentSeason.startDate)}</li>
-                            <li>End Date : ${formatDate(competition.currentSeason.endDate)}</li>
-                            <li>Matchday : ${competition.currentSeason.currentMatchday ? competition.currentSeason.currentMatchday : 0}</li>
-                            <li>Winner : ${competition.currentSeason.winner ? competition.currentSeason.winner : 'No Winner'}</li>
+                            <li>Start Date : ${formatDate(competition.startDate)}</li>
+                            <li>End Date : ${formatDate(competition.endDate)}</li>
+                            <li>Matchday : ${competition.matchday ? competition.matchday : 0}</li>
+                            <li>Winner : ${competition.winner ? competition.winner : 'No Winner'}</li>
                         </ul>
                     </div>
                 </div>
             </div>
             `;
-            });
-
-            // Hide the preloader
-            document.getElementById("competition-preloader").classList.remove("active");
-            // Display the competition data
-            document.getElementById("competitions").innerHTML = competitionsHTML;
-            // Add click event listener to favorite buttons
-            competitions.forEach(function (competition) {
-                document.getElementById("fav-comp-btn-" + competition.id).addEventListener('click', function (event) {
-                    favoriteCompetition(competition);
-                })
-            });
-        })
-        .catch(error);
+        });
+        // Hide the preloader
+        document.getElementById("fav-competition-preloader").classList.remove("active");
+        // Display the competition data
+        document.getElementById("favorite-competitions").innerHTML = favCompetitionsHTML;
+    })
 }
 
 // Get certain competition data
