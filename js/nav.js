@@ -82,6 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		} else if (page === "favorite") {
 			// fetch favorite competition
 			getFavoriteCompetitions();
+			// fetch favorite team
+			getFavoriteTeams();
 		}
 	}
 

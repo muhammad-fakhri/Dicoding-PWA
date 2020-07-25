@@ -65,7 +65,7 @@ function getCompetitions() {
                             alt="Competition Emblem" />
                         <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2" 
                             id="fav-comp-btn-${competition.id}"
-                            onclick="M.toast({html: 'Favorited ${competition.name}'});">
+                            onclick="M.toast({html: 'Favorited team ${competition.name}'});">
                             <i class="material-icons">favorite_border</i>
                         </a>
                     </div>
@@ -154,18 +154,6 @@ function getFavoriteCompetitions() {
     });
 }
 
-// Get certain competition data
-// function getCompetitionById(id) {
-//     fetch(baseUrl + "/competitions/" + id, option)
-//         .then(status)
-//         .then(json)
-//         .then(function (data) {
-//             console.log(data);
-//             favoriteCompetition(data);
-//         })
-//         .catch(error);
-// }
-
 // Get all football teams in England
 function getTeams() {
     fetch(baseUrl + "/teams?areas=" + areaId, option)
@@ -178,29 +166,89 @@ function getTeams() {
             teams.forEach(function (team) {
                 teamsHTML += `
                 <div class="col s12 m4">
-                <div class="card hoverable">
-                    <div class="card-image team-crest-wrapper">
-                        <img class="team-crest" 
-                            src="${team.crestUrl ? team.crestUrl : "images/no-image.png"}" 
-                            alt="Team Crest" />
-                        <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2">
-                            <i class="material-icons">favorite_border</i>
-                        </a>
-                    </div>
-                    <div class="card-content team-content">
-                        <span class="card-title" id="team-name">${team.name}</span>
-                        <p>Est since ${team.founded}. Their base is at ${team.venue}, ${team.address}</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="${team.website}" target="_blank" class="pink-text accent-2">Visit website</a>
+                    <div class="card hoverable">
+                        <div class="card-image team-crest-wrapper">
+                            <img class="team-crest" 
+                                src="${team.crestUrl ? team.crestUrl : "images/no-image.png"}" 
+                                alt="Team Crest" />
+                            <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2"
+                                id="fav-team-btn-${team.id}"
+                                onclick="M.toast({html: 'Favorited team ${team.name}'});">
+                                <i class="material-icons">favorite_border</i>
+                            </a>
+                        </div>
+                        <div class="card-content team-content">
+                            <span class="card-title" id="team-name">${team.name}</span>
+                            <p>Est since ${team.founded}. Their base is at ${team.venue}, ${team.address}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="${team.website}" target="_blank" class="pink-text accent-2">Visit website</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            `;
+                `;
             });
 
-            // Hide the preloader and Load the competition data
+            // Hide the preloader and Load the team data
             document.getElementById("teams").innerHTML = teamsHTML;
+            teams.forEach(function (team) {
+                // Add click event listener to favorite buttons
+                document.getElementById("fav-team-btn-" + team.id).addEventListener('click', function (event) {
+                    favoriteTeam(team);
+                })
+                // Check whether the data has been added to favorite competition
+                checkFavorite("team", team.id);
+            });
         })
         .catch(error);
+}
+
+// Get all favorite football teams
+function getFavoriteTeams() {
+    getAllTeam().then(function (favTeams) {
+        let favTeamsHTML = "";
+        if (favTeams.length > 0) {
+            favTeams.forEach(function (team) {
+                favTeamsHTML += `
+                <div class="col s12 m4">
+                    <div class="card hoverable">
+                        <div class="card-image team-crest-wrapper">
+                            <img class="team-crest" 
+                                src="${team.crestUrl ? team.crestUrl : "images/no-image.png"}" 
+                                alt="Team Crest" />
+                            <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2"
+                                id="fav-team-btn-${team.id}"
+                                onclick="M.toast({html: 'Unfavorite team ${team.name}'});">
+                                <i class="material-icons">favorite</i>
+                            </a>
+                        </div>
+                        <div class="card-content team-content">
+                            <span class="card-title" id="team-name">${team.name}</span>
+                            <p>Est since ${team.founded}. Their base is at ${team.venue}, ${team.address}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="${team.website}" target="_blank" class="pink-text accent-2">Visit website</a>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+        } else {
+            favTeamsHTML += `
+                <h6 class="center-align">No favorite team</h6>
+            `;
+        }
+
+        delay(1000).then(function () { // Delay for 1 second
+            // Hide the preloader and Display the favorite competition data
+            document.getElementById("favorite-teams").innerHTML = favTeamsHTML;
+
+            // Add click event listener to favorite buttons
+            favTeams.forEach(function (team) {
+                document.getElementById("fav-team-btn-" + team.id).addEventListener('click', function (event) {
+                    favoriteTeam(team);
+                })
+            });
+        });
+    });
 }

@@ -37,20 +37,19 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col s12 m4">
-            <div class="card hoverable">
-                <div class="card-image team-crest-wrapper">
-                    <img class="team-crest" src="images/no-image.png" alt="Team Crest" />
-                    <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2"><i
-                            class="material-icons">favorite_border</i></a>
-                </div>
-                <div class="card-content team-content">
-                    <span class="card-title" id="team-name">team.name</span>
-                    <p>Est since ${team.founded}. Their base is at ${team.venue}, ${team.address}</p>
-                </div>
-                <div class="card-action">
-                    <a href="#" target="_blank" class="pink-text accent-2">Visit website</a>
+    <div class="row" id="favorite-teams">
+        <div class="col s12 m12 center-align" id="fav-team-preloader">
+            <div class="preloader-wrapper active">
+                <div class="spinner-layer spinner-red-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
                 </div>
             </div>
         </div>
