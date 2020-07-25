@@ -1,5 +1,3 @@
-import { getCompetitions, getTeams } from "./api.js";
-
 document.addEventListener('DOMContentLoaded', function () {
 
 	// SIDEBAR NAVIGATION

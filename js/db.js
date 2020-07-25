@@ -5,22 +5,39 @@ const dbPromise = idb.open("vanir", 1, function (upgradeDb) {
     competitionsObjectStore.createIndex("name", "name", { unique: false });
 });
 
-function getCompetition(id) {
-    let data = dbPromise
-        .then(function (db) {
-            // check data, exist in database or not
-            let tx = db.transaction("competitions", "readwrite");
-            let store = tx.objectStore("competitions");
-            return store.get(id);
-        })
-    return data;
+function getCompetitionById(id) {
+    return new Promise(function (resolve, reject) {
+        dbPromise
+            .then(function (db) {
+                // check data, exist in database or not
+                let tx = db.transaction("competitions", "readwrite");
+                let store = tx.objectStore("competitions");
+                return store.get(id);
+            }).then(function (competition) {
+                resolve(competition);
+            });
+    });
+}
+
+function getAllCompetition() {
+    return new Promise(function (resolve, reject) {
+        dbPromised
+            .then(function (db) {
+                var tx = db.transaction("articles", "readonly");
+                var store = tx.objectStore("articles");
+                return store.getAll();
+            })
+            .then(function (articles) {
+                resolve(articles);
+            });
+    });
 }
 
 function favoriteCompetition(competition) {
     dbPromise
         .then(function (db) {
             // check data, exist in database or not
-            let data = getCompetition(competition.id);
+            let data = getCompetitionById(competition.id);
             data.then(function (val) {
                 if (val === undefined) {
                     let tx = db.transaction("competitions", "readwrite");
@@ -53,5 +70,3 @@ function favoriteCompetition(competition) {
             console.log("Error when favoriting competition " + competition.name);
         });
 }
-
-export { favoriteCompetition };
