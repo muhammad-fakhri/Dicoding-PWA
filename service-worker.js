@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vanir-v2';
+const CACHE_NAME = 'vanir-v1';
 const urlsToCache = [
 	'/css',
 	'/images',
@@ -6,7 +6,6 @@ const urlsToCache = [
 	'/pages',
 	'/debug.log',
 	'/favicon.ico',
-	'/files.txt',
 	'/index.html',
 	'/manifest.json',
 	'/nav.html',
@@ -89,5 +88,28 @@ self.addEventListener('fetch', function (event) {
 					}
 				);
 			})
+	);
+});
+
+self.addEventListener('push', function (event) {
+	let body;
+	const title = 'Vanir Notification';
+	if (event.data) {
+		body = event.data.text();
+	} else {
+		body = 'Push message no payload';
+	}
+	const options = {
+		body: body,
+		icon: 'images/logo.png',
+		badge: 'images/logo.png',
+		vibrate: [100, 50, 100],
+		data: {
+			dateOfArrival: Date.now(),
+			primaryKey: 1
+		}
+	};
+	event.waitUntil(
+		self.registration.showNotification(title, options)
 	);
 });
