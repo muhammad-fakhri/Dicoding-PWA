@@ -8,7 +8,7 @@ const option = {
     }
 };
 
-// Blok kode yang akan di panggil jika fetch berhasil
+// Block of code that will be called if the fetch is successful
 function status(response) {
     if (response.status !== 200) {
         console.log("Error : " + response.status);
@@ -20,12 +20,12 @@ function status(response) {
     }
 }
 
-// Blok kode untuk memparsing json menjadi array JavaScript
+// Block of code to parse json into a JavaScript array
 function json(response) {
     return response.json();
 }
 
-// Blok kode untuk meng-handle kesalahan di blok catch
+// Code block to handle errors in the catch block
 function error(error) {
     // Parameter error berasal dari Promise.reject()
     console.log("Error : " + error);
