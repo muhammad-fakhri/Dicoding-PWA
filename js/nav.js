@@ -31,19 +31,19 @@ document.addEventListener('DOMContentLoaded', function () {
 						});
 					});
 
-				// // Daftarkan event listener untuk tombol tautan di jumbotron
-				// const aboutButton = document.getElementById("about-button");
-				// aboutButton.addEventListener('click', function (event) {
-				// 	// Muat halaman about
-				// 	loadPage('about');
-				// })
+				// Add event listener for discover button in jumbotron
+				const aboutButton = document.getElementById("discover-btn");
+				aboutButton.addEventListener('click', function (event) {
+					// Load competition page
+					loadPage('competition');
+				})
 
-				// // Daftarkan event listener untuk logo
-				// const logo = document.getElementById("logo");
-				// logo.addEventListener('click', function (event) {
-				// 	// Muat halaman home
-				// 	loadPage('home');
-				// })
+				// Add event listener for logo
+				const logo = document.getElementById("logo");
+				logo.addEventListener('click', function (event) {
+					// Load home page
+					loadPage('home');
+				})
 			}
 		};
 		xhttp.open("GET", 'nav.html', true);
