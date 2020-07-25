@@ -1,11 +1,11 @@
-import { setVapidDetails, sendNotification } from 'web-push';
+const webPush = require('web-push');
 
 const vapidKeys = {
     "publicKey": "BNyb8SYHYTaRBXDpKvqb8GrYpMkOcT5XyFdivoWIjTrcrhqaCAI2lyOMILxKTiEPDDV93jH65pGPSmQLELXBMXM",
     "privateKey": "-sE2RPPPfN9u17sGWukxMtUJLXFpGlJ40DrbTIJNbnQ"
 };
 
-setVapidDetails(
+webPush.setVapidDetails(
     'admin@muhammadfakhri.my.id',
     vapidKeys.publicKey,
     vapidKeys.privateKey
@@ -23,7 +23,7 @@ const options = {
     gcmAPIKey: '107891490415',
     TTL: 60
 };
-sendNotification(
+webPush.sendNotification(
     pushSubscription,
     payload,
     options
