@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			// fetch teams data
 			getTeams();
 		} else if (page === "favorite") {
+			// fetch favorite competition
 			getFavoriteCompetitions();
 		}
 	}
