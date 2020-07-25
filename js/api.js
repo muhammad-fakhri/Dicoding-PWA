@@ -9,7 +9,6 @@ const option = {
         "X-Auth-Token": apiKey
     }
 };
-
 // Blok kode yang akan di panggil jika fetch berhasil
 function status(response) {
     if (response.status !== 200) {
@@ -90,16 +89,16 @@ function getCompetitions() {
 }
 
 // Get certain competition data
-function getCompetitionById(id) {
-    fetch(baseUrl + "/competitions/" + id, option)
-        .then(status)
-        .then(json)
-        .then(function (data) {
-            console.log(data);
-            favoriteCompetition(data);
-        })
-        .catch(error);
-}
+// function getCompetitionById(id) {
+//     fetch(baseUrl + "/competitions/" + id, option)
+//         .then(status)
+//         .then(json)
+//         .then(function (data) {
+//             console.log(data);
+//             favoriteCompetition(data);
+//         })
+//         .catch(error);
+// }
 
 // Get all football teams in England
 function getTeams() {
