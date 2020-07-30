@@ -96,3 +96,7 @@ footer.page-footer {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+.developer-email-text {
+  overflow-wrap: anywhere;
+}

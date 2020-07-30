@@ -62,10 +62,10 @@ function getCompetitions() {
                     <div class="card-image">
                         <img class="competition-emblem" 
                             src="${competition.emblemUrl ? competition.emblemUrl : "images/no-image.png"}" 
-                            alt="Competition Emblem" />
+                            alt="Competition Emblem" onerror="this.src='images/no-image.png'"/>
                         <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2" 
                             id="fav-comp-btn-${competition.id}"
-                            onclick="M.toast({html: 'Favorited team ${competition.name}'});">
+                            onclick="M.toast({html: 'Favorited competition ${competition.name}'});">
                             <i class="material-icons">favorite_border</i>
                         </a>
                     </div>
@@ -111,10 +111,10 @@ function getFavoriteCompetitions() {
                         <div class="card-image">
                             <img class="competition-emblem" 
                                 src="${competition.emblemUrl ? competition.emblemUrl : "images/no-image.png"}"  
-                                alt="Competition emblem" />
+                                alt="Competition emblem" onerror="this.src='images/no-image.png'"/>
                             <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2" 
                                 id="fav-comp-btn-${competition.id}"
-                                onclick="M.toast({html: 'Unfavorited ${competition.name}'});">
+                                onclick="M.toast({html: 'Unfavorited competition ${competition.name}'});">
                                 <i class="material-icons">favorite</i>
                             </a>
                         </div>
@@ -170,7 +170,7 @@ function getTeams() {
                         <div class="card-image team-crest-wrapper">
                             <img class="team-crest" 
                                 src="${team.crestUrl ? team.crestUrl : "images/no-image.png"}" 
-                                alt="Team Crest" />
+                                alt="Team Crest" onerror="this.src='images/no-image.png'"/>
                             <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2"
                                 id="fav-team-btn-${team.id}"
                                 onclick="M.toast({html: 'Favorited team ${team.name}'});">
@@ -215,7 +215,7 @@ function getFavoriteTeams() {
                         <div class="card-image team-crest-wrapper">
                             <img class="team-crest" 
                                 src="${team.crestUrl ? team.crestUrl : "images/no-image.png"}" 
-                                alt="Team Crest" />
+                                alt="Team Crest" onerror="this.src='images/no-image.png'"/>
                             <a class="btn-floating btn-large halfway-fab waves-effect waves-light pink accent-2"
                                 id="fav-team-btn-${team.id}"
                                 onclick="M.toast({html: 'Unfavorite team ${team.name}'});">

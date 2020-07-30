@@ -81,7 +81,7 @@ function addCompetition(competition) {
             matchday: competition.currentSeason.currentMatchday,
             winner: competition.currentSeason.winner
         };
-        store.add(item);
+        store.put(item, competition.id);
         return tx.complete;
     }).then(function () {
         console.log("Favorited competition " + competition.name);

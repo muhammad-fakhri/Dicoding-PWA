@@ -18,8 +18,8 @@ const urlsToCache = [
 	'/images/icon/apple-touch-icon-180x180.png',
 	'/images/icon/favicon-16x16.png',
 	'/images/icon/favicon-32x32.png',
-	'/images/icon/pwa-192x192.png',
-	'/images/icon/pwa-512x512.png',
+	'/images/icon/pwa-192x192_maskable.png',
+	'/images/icon/pwa-512x512_maskable.png',
 	'/js/api.js',
 	'/js/db.js',
 	'/js/idb.js',
@@ -63,30 +63,19 @@ self.addEventListener('activate', function (event) {
 })
 
 self.addEventListener('fetch', function (event) {
-	event.respondWith(
-		caches.match(event.request, { cacheName: CACHE_NAME })
-			.then(function (response) {
-				if (response) {
-					console.log("ServiceWorker: Use cached asset: ", response.url);
-					return response;
-				}
 
-				console.log("ServiceWorker: Loading asset from the server: ", event.request.url);
-				let fetchRequest = event.request.clone();
-				return fetch(fetchRequest).then(
-					function (response) {
-						if (!response || response.status !== 200) {
-							return response;
-						}
-						let responseToCache = response.clone();
-						caches.open(CACHE_NAME)
-							.then(function (cache) {
-								cache.put(event.request, responseToCache);
-							});
-						return response;
-					}
-				);
+	event.respondWith(
+		caches.open(CACHE_NAME).then(function (cache) {
+			return cache.match(event.request).then(function (response) {
+				let fetchPromise = fetch(event.request).then(function (networkResponse) {
+					cache.put(event.request, networkResponse.clone());
+					return networkResponse;
+				})
+				return response || fetchPromise;
 			})
+		})
+
+
 	);
 });
 

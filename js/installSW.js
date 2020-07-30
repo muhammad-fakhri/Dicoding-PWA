@@ -41,22 +41,24 @@ function requestNotificationPermission() {
         console.log("Notification feature allowed.");
 
         // Subscribe to push messages via the PushManager object
-        if (('PushManager' in window)) {
-            navigator.serviceWorker.getRegistration().then(function (registration) {
-                registration.pushManager.subscribe({
-                    userVisibleOnly: true,
-                    applicationServerKey: urlBase64ToUint8Array("BNyb8SYHYTaRBXDpKvqb8GrYpMkOcT5XyFdivoWIjTrcrhqaCAI2lyOMILxKTiEPDDV93jH65pGPSmQLELXBMXM")
-                }).then(function (subscribe) {
-                    console.log('Successfully subscribed with endpoint: ', subscribe.endpoint);
-                    console.log('Successfully subscribed with p256dh key: ', btoa(String.fromCharCode.apply(
-                        null, new Uint8Array(subscribe.getKey('p256dh')))));
-                    console.log('Successfully subscribed with auth key: ', btoa(String.fromCharCode.apply(
-                        null, new Uint8Array(subscribe.getKey('auth')))));
-                }).catch(function (e) {
-                    console.error('Unable to subscribe, ', e.message);
+        navigator.serviceWorker.ready.then(() => {
+            if (('PushManager' in window)) {
+                navigator.serviceWorker.getRegistration().then(function (registration) {
+                    registration.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array("BNyb8SYHYTaRBXDpKvqb8GrYpMkOcT5XyFdivoWIjTrcrhqaCAI2lyOMILxKTiEPDDV93jH65pGPSmQLELXBMXM")
+                    }).then(function (subscribe) {
+                        console.log('Successfully subscribed with endpoint: ', subscribe.endpoint);
+                        console.log('Successfully subscribed with p256dh key: ', btoa(String.fromCharCode.apply(
+                            null, new Uint8Array(subscribe.getKey('p256dh')))));
+                        console.log('Successfully subscribed with auth key: ', btoa(String.fromCharCode.apply(
+                            null, new Uint8Array(subscribe.getKey('auth')))));
+                    }).catch(function (e) {
+                        console.error('Unable to subscribe, ', e.message);
+                    });
                 });
-            });
-        }
+            }
+        });
     });
 }
 
