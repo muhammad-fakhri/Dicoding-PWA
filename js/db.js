@@ -169,7 +169,7 @@ function addTeam(team) {
             address: team.address,
             website: team.website
         };
-        store.add(item);
+        store.put(item);
         return tx.complete;
     }).then(function () {
         console.log("Favorited team " + team.name);
