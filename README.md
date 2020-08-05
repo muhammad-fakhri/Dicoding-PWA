@@ -1,5 +1,6 @@
 # Vanir
-Guide for Football in England. PWA Project for submission 2 in Dicoding PWA Course
+Guide for Football in England. PWA Project for submission 2 in Dicoding PWA Course  
+Deployed on firebase and use workbox in service worker
 
 ### Satisfy Your Curiosity !
 
