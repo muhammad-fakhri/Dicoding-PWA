@@ -5,6 +5,6 @@ This project is my PWA project to fulfill the PWA Dicoding course
 Please switch the branch to see each content
 * Submission 1 (Portfolio-PWA)
 * Submission 2 (Vanir)
-* Submission 3 (Not yet created)
+* Submission 3 (Vanir, with workbox and deployed on firebase)
 
 Created with <3 by Muhammad Fakhri
