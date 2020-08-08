@@ -33,10 +33,36 @@ workbox.precaching.precacheAndRoute([
 	{ url: '/pages/favorite.html', revision: '1' },
 	{ url: '/pages/home.html', revision: '1' },
 	{ url: '/pages/team.html', revision: '1' },
-	{ url: 'https://code.jquery.com/jquery-2.1.1.min.js', revision: '1' },
-	{ url: 'https://fonts.googleapis.com/icon?family=Material+Icons', revision: '1' },
-	{ url: 'https://fonts.gstatic.com/s/materialicons/v53/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2', revision: '1' },
+	{ url: 'https://code.jquery.com/jquery-2.1.1.min.js', revision: '1' }
 ]);
+
+workbox.routing.registerRoute(
+	new RegExp('https://api.football-data.org/v2/'),
+	workbox.strategies.staleWhileRevalidate()
+);
+
+workbox.routing.registerRoute(
+	/^https:\/\/fonts\.googleapis\.com/,
+	workbox.strategies.staleWhileRevalidate({
+		cacheName: 'google-fonts-stylesheets',
+	})
+);
+
+workbox.routing.registerRoute(
+	/^https:\/\/fonts\.gstatic\.com/,
+	workbox.strategies.cacheFirst({
+		cacheName: 'google-fonts-webfonts',
+		plugins: [
+			new workbox.cacheableResponse.Plugin({
+				statuses: [0, 200],
+			}),
+			new workbox.expiration.Plugin({
+				maxAgeSeconds: 60 * 60 * 24 * 365,
+				maxEntries: 30,
+			}),
+		],
+	})
+);
 
 workbox.routing.registerRoute(
 	new RegExp('.*'),
