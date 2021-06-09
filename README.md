@@ -3,4 +3,4 @@ Guide for Football in England. PWA Project for submission 2 in Dicoding PWA Cour
 
 ### Satisfy Your Curiosity !
 
-Created with <3 by Muhammad Fakhri
+Created with <3 by Nyxordinal
