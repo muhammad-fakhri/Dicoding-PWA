@@ -7,4 +7,4 @@ Please switch the branch to see each content
 * Submission 2 (Vanir)
 * Submission 3 (Vanir, with workbox and deployed on firebase)
 
-Created with <3 by Muhammad Fakhri
+Created with <3 by Nyxordinal
