@@ -4,4 +4,4 @@ Deployed on firebase and use workbox in service worker
 
 ### Satisfy Your Curiosity !
 
-Created with <3 by Muhammad Fakhri
+Created with <3 by Nyxordinal
